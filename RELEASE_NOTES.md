@@ -2,8 +2,8 @@
 
 ## Development release
 
-- Spectral 3 Type-specific loudness distribution and peak budget processing.
-- Drive range capped at +24 dB for the Spectral 3 build.
+- Type-specific loudness distribution and peak budget processing.
+- Drive range capped at +24 dB for the current build.
 - Ceiling contour recovery for additional RMS density without increasing the
   configured final clip amount.
 - True Peak and lookahead safety paths retained.

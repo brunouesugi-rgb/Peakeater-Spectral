@@ -1,6 +1,6 @@
-# Peakeater Spectral 2 macOS AU Build Package
+# Peakeater Spectral macOS AU Build Package
 
-This package is prepared on Windows for building Peakeater Spectral 2 as a macOS Audio Unit on a Mac.
+This package is prepared on Windows for building Peakeater Spectral as a macOS Audio Unit on a Mac.
 
 ## Important
 
@@ -20,7 +20,7 @@ cmake --build build-mac --config Release --target peakeater_spectral_2_AU
 Expected AU output is a `.component` bundle under the build artifacts folder, commonly similar to:
 
 ```text
-build-mac/peakeater_spectral_2_artefacts/Release/AU/Peakeater Spectral 2.component
+build-mac/peakeater_spectral_2_artefacts/Release/AU/Peakeater Spectral.component
 ```
 
 ## Install on Mac
@@ -38,5 +38,5 @@ Then rescan plugins in the DAW.
 If pluginval is available on Mac:
 
 ```bash
-pluginval --strictness-level 10 --verbose --validate-in-process "path/to/Peakeater Spectral 2.component"
+pluginval --strictness-level 10 --verbose --validate-in-process "path/to/Peakeater Spectral.component"
 ```

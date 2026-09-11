@@ -3,7 +3,7 @@
 Peakeater Spectral is a GPL-3.0 spectral limiter/maximizer by AXLRTR Audio
 Lab. It is a modified derivative of the open-source PeakEater project. The
 original project remains the upstream foundation; this repository contains
-additional Spectral 3 processing, Type-specific loudness control, transient and
+additional spectral processing, Type-specific loudness control, transient and
 low-band protection, True Peak safety, and performance work.
 
 This is an independent community modification and is not affiliated with the
@@ -26,12 +26,12 @@ then add the judgment tools expected from a modern maximizer.
 - Output judgment panel with Input Peak, Output Peak, True Peak estimate,
   LUFS-S estimate, RMS, Crest Factor, Gain Reduction, and Clip Amount.
 - Small realtime oscilloscope for checking waveform shape after processing.
-- Spectral 3 Windows VST3 build. Other formats remain available where the
+- Windows VST3 build. Other formats remain available where the
   selected CMake configuration supports them.
 
 ## Status
 
-Spectral 3 is published as an open-source development release. It has passed a
+Peakeater Spectral is published as an open-source development release. It has passed a
 Release build, project regression tests, and `pluginval` strictness 10 for the
 Windows VST3 artifact. Ableton and REAPER listening tests should still be done
 with the exact release material before production use.
