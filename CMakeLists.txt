@@ -125,7 +125,7 @@ configure_peakeater_target(peakeater_spectral_2
     EXTRA_DEFINES PEAKEATER_SPECTRAL_2_VARIANT=1)
 
 configure_peakeater_target(peakeater_spectral_3
-    "Peakeater Spectral 3"
+    "Peakeater Spectral"
     PkS3
     "audio.axlrtr.peakeater-spectral-3"
     FORMATS VST3 Standalone

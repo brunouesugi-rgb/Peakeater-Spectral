@@ -1,4 +1,4 @@
-# Peakeater Spectral 3 release notes
+# Peakeater Spectral release notes
 
 ## Development release
 

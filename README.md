@@ -1,6 +1,6 @@
-# Peakeater Spectral 3
+# Peakeater Spectral
 
-Peakeater Spectral 3 is a GPL-3.0 spectral limiter/maximizer by AXLRTR Audio
+Peakeater Spectral is a GPL-3.0 spectral limiter/maximizer by AXLRTR Audio
 Lab. It is a modified derivative of the open-source PeakEater project. The
 original project remains the upstream foundation; this repository contains
 additional Spectral 3 processing, Type-specific loudness control, transient and
@@ -51,7 +51,7 @@ C:\Program Files\Common Files\VST3
 The release build produces:
 
 ```text
-build/Release/peakeater_spectral_3_artefacts/Release/VST3/Peakeater Spectral 3.vst3
+build/Release/peakeater_spectral_3_artefacts/Release/VST3/Peakeater Spectral.vst3
 ```
 
 ### macOS
@@ -110,7 +110,7 @@ result with meters.
 
 ## Upstream, modifications, and license
 
-Peakeater Spectral 3 is distributed under the GPL-3.0 License. See
+Peakeater Spectral is distributed under the GPL-3.0 License. See
 `LICENSE.md` for details.
 
 This project derives from the open-source PeakEater project. Preserve upstream
