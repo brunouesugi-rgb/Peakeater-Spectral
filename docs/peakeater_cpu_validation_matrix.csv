@@ -1,0 +1,1 @@
+plugin_variant,quality,type,sample_rate,buffer_size,instance_count,average_cpu,peak_cpu,rt_cpu,xrun_or_dropout,latency_samples,analyzer_open,drywet,drive_db,clip_count,true_peak_est_db,rms_db,lufs_like,crest_db,high_band_energy,low_mono_risk,notes

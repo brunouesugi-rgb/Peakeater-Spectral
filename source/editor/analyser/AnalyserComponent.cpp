@@ -1,0 +1,52 @@
+#include "AnalyserComponent.h"
+
+#include <JuceHeader.h>
+
+#include <cmath>
+#include <utility>
+
+#include "../ColourScheme.h"
+#include "../Utils.h"
+#include "processor/Sigmoid.h"
+
+namespace pe {
+namespace gui {
+namespace {
+// GUI configuration
+int constexpr gBorderWidth = 1;
+int constexpr gBorderRadius = 10;
+}  // namespace
+AnalyserComponent::AnalyserComponent(std::shared_ptr<juce::AudioProcessorValueTreeState> parameters, LevelMetersPack const& levelMetersPack)
+    : mClipTypeComponent(levelMetersPack), mPeakAnalyzerComponent(levelMetersPack), mDynamicsStatsComponent(levelMetersPack) {
+    juce::ignoreUnused(parameters);
+    addAndMakeVisible(mClipTypeComponent);
+    addAndMakeVisible(mPeakAnalyzerComponent);
+    addAndMakeVisible(mDynamicsStatsComponent);
+}
+
+AnalyserComponent::~AnalyserComponent() { setLookAndFeel(nullptr); }
+
+void AnalyserComponent::setScopeClickCallback(std::function<void()> callback) {
+    mClipTypeComponent.setClickCallback(std::move(callback));
+}
+
+void AnalyserComponent::resized() {
+    juce::Grid grid;
+    using Track = juce::Grid::TrackInfo;
+    using Fr = juce::Grid::Fr;
+    using Item = juce::GridItem;
+    grid.templateRows = {Track(Fr(1))};
+    grid.templateColumns = {Track(Fr(2)), Track(Fr(3)), Track(Fr(3))};
+    grid.items = {Item(mClipTypeComponent), Item(mPeakAnalyzerComponent).withMargin({5, 0, 5, 2}), Item(mDynamicsStatsComponent).withMargin({5, 4, 5, 8})};
+    grid.performLayout(getLocalBounds());
+}
+
+void AnalyserComponent::paint(juce::Graphics& g) {
+    auto bounds = getLocalBounds().toFloat().reduced(gBorderWidth);
+    g.setColour(colourscheme::BackgroundSecondary.withAlpha(0.9f));
+    g.fillRoundedRectangle(bounds, gBorderRadius);
+    g.setColour(colourscheme::BackgroundTertiary.withAlpha(0.5f));
+    g.drawRoundedRectangle(bounds, gBorderRadius, gBorderWidth);
+}
+}  // namespace gui
+}  // namespace pe
