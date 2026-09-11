@@ -92,6 +92,16 @@ Validate the VST3 with pluginval:
 ..\tools\pluginval\v1.0.4\pluginval.exe --strictness-level 10 --verbose --validate-in-process "build\Release\peakeater_spectral_artefacts\Release\VST3\Peakeater Spectral Beta.vst3"
 ```
 
+The same CMake configuration generates a CLAP build through
+`clap-juce-extensions`. Build it with:
+
+```powershell
+cmake --build build\\Fast --config Release --target peakeater_spectral_3_CLAP
+```
+
+The resulting `Peakeater Spectral.clap` bundle can be installed in
+`C:\\Program Files\\Common Files\\CLAP` on Windows or `~/.clap` on Linux.
+
 ## Design Notes
 
 The main DSP chain is:
