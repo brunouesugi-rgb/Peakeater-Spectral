@@ -1,73 +1,55 @@
 # Peakeater Spectral
 
-Peakeater Spectral is a GPL-3.0 spectral limiter/maximizer by AXLRTR Audio
-Lab. It is a modified derivative of the open-source PeakEater project. The
-original project remains the upstream foundation; this repository contains
-additional spectral processing, Type-specific loudness control, transient and
-low-band protection, True Peak safety, and performance work.
+Peakeater Spectralは、AXLRTR Audio LabによるGPL-3.0ライセンスのスペクトル・
+リミッター／マキシマイザーです。オープンソースのPeakEaterを土台にした独立した
+コミュニティ改良版で、スペクトル処理、Type別の音圧制御、トランジェント保護、
+低域保護、True Peak安全性、CPU効率の改善を含みます。
 
-This is an independent community modification and is not affiliated with the
-original PeakEater authors unless explicitly stated in the contributor history.
+本プロジェクトはPeakEaterの作者とは独立しており、明示された場合を除いて公式な
+関係や承認を意味しません。PeakEater由来の表示とライセンス条件は維持してください。
 
-The current public-alpha direction is simple: keep the immediacy of PeakEater,
-then add the judgment tools expected from a modern maximizer.
+## 特徴
 
-## Features
+- プロジェクト互換性のため、元の `Threshold` パラメータIDを維持したDrive中心の
+  リミッター・ワークフロー
+- EDM、Hip Hop、Drums、One Shot、One Shot Clean、Acoustic、Vocal、Bass、Bright、
+  Glue、Clean、Percs、Dubstep、DrumNBass、House、Trap、808&Kick向けのType別処理
+- 12バンド・リミッターと32バンド・スペクトル制御。Quality設定に応じて内部処理を
+  調整し、リアルタイムCPU負荷を管理
+- Ceiling、Detector HP、Saturation、Tone、Tone Mode、Attack、Hold、Release、
+  Transient Recovery、Lookahead、Output、Dry/Wet
+- Input Peak、Output Peak、True Peak推定値、LUFS-S推定値、RMS、Crest Factor、
+  Gain Reduction、Clip Amountを確認できるメーターパネル
+- 処理後の波形を確認できるリアルタイム・オシロスコープ
+- Windows VST3およびCLAPビルド。選択したCMake設定では他形式も生成できます
 
-- Drive-first limiter workflow with the original `Threshold` parameter ID kept
-  for project compatibility.
-- Type-aware processing for EDM, Hip Hop, Drums, One Shot, One Shot Clean,
-  Acoustic, Vocal, Bass, Bright, Glue, Clean, Percs, Dubstep, DrumNBass,
-  House, Trap, and 808&Kick.
-- 12-band limiter stage plus 32-bin spectral control bank, scaled internally by
-  the Quality setting while keeping realtime CPU under control.
-- Final Ceiling protection, Detector HP, Saturation, Tone, Tone Mode, Attack,
-  Hold, Release, Transient Recovery, Lookahead, Output, and Dry/Wet.
-- Output judgment panel with Input Peak, Output Peak, True Peak estimate,
-  LUFS-S estimate, RMS, Crest Factor, Gain Reduction, and Clip Amount.
-- Small realtime oscilloscope for checking waveform shape after processing.
-- Windows VST3 build. Other formats remain available where the
-  selected CMake configuration supports them.
+## 状態
 
-## Status
+Peakeater Spectralはオープンソースの開発リリースです。Releaseビルド、プロジェクトの
+回帰テスト、Windows VST3のpluginval strictness 10検証を実施しています。実際の制作で
+使用する前に、対象のDAWと素材で動作を確認してください。
 
-Peakeater Spectral is published as an open-source development release. It has passed a
-Release build, project regression tests, and `pluginval` strictness 10 for the
-Windows VST3 artifact. Ableton and REAPER listening tests should still be done
-with the exact release material before production use.
+## インストール
 
-Release archives are published from the GitHub Releases page for tagged builds.
+### Windows簡易インストーラー
 
-## Installation
-
-### 日本語の説明
-
-Peakeater Spectralは、PeakEaterを土台に改良したGPL-3.0のオープンソース・
-スペクトルリミッター／マキシマイザーです。Driveで音圧を上げながら、True Peak、
-トランジェント、低域のモノ互換性を確認しやすい設計を目指しています。
-
-Windowsでは、パッケージ内の `tools\\install-peakeater-spectral.bat` を実行すると、
-管理者権限なしでVST3とCLAPをユーザー用フォルダへインストールできます。インストール
-後にAbleton Liveや使用中のDAWを再起動し、プラグインを再スキャンしてください。
+パッケージ内の `tools\\install-peakeater-spectral.bat` を実行すると、管理者権限なしで
+VST3とCLAPをユーザー用フォルダへコピーできます。インストール後、DAWを再起動し、必要に
+応じてプラグインを再スキャンしてください。
 
 ### Windows VST3
-
-Copy the VST3 bundle to:
 
 ```text
 C:\Program Files\Common Files\VST3
 ```
 
-The release build produces:
+### Windows CLAP
 
 ```text
-build/Release/peakeater_spectral_3_artefacts/Release/VST3/Peakeater Spectral.vst3
+C:\Users\<ユーザー名>\.clap
 ```
 
 ### macOS
-
-Install the format you need into the standard user or system audio plugin
-folder:
 
 ```text
 /Library/Audio/Plug-Ins/VST3
@@ -78,69 +60,50 @@ folder:
 
 ### Linux
 
-Copy the desired format to one of the standard plugin folders:
-
 ```text
 ~/.vst3
 ~/.clap
 ~/.lv2
 ```
 
-## Building
+## ビルド
 
-This project uses CMake, Conan, JUCE, and the original PeakEater build layout.
-On Windows, the local profile is recommended:
+このプロジェクトはCMake、Conan、JUCE、PeakEater由来のビルド構成を使用します。
 
 ```powershell
-$env:Path = 'C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;C:\Program Files\Microsoft Visual Studio\18\Insiders\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja;' + $env:Path
 .\.venv\Scripts\conan.exe build . -pr:h config/conan/windows-local.jinja -pr:b config/conan/windows-local.jinja
 ```
 
-Validate the VST3 with pluginval:
+VST3の検証:
 
 ```powershell
-..\tools\pluginval\v1.0.4\pluginval.exe --strictness-level 10 --verbose --validate-in-process "build\Release\peakeater_spectral_artefacts\Release\VST3\Peakeater Spectral Beta.vst3"
+pluginval.exe --strictness-level 10 --verbose --validate-in-process "Peakeater Spectral.vst3"
 ```
 
-The same CMake configuration generates a CLAP build through
-`clap-juce-extensions`. Build it with:
+CLAPのビルド:
 
 ```powershell
-cmake --build build\\Fast --config Release --target peakeater_spectral_3_CLAP
+cmake --build build\Fast --config Release --target peakeater_spectral_3_CLAP
 ```
 
-The resulting `Peakeater Spectral.clap` bundle can be installed in
-`C:\\Program Files\\Common Files\\CLAP` on Windows or `~/.clap` on Linux.
-
-## Design Notes
-
-The main DSP chain is:
+## DSP構成
 
 ```text
-Drive -> 12-band limiter -> 32-bin spectral bank -> Final Ceiling
+Drive -> 12バンド・リミッター -> 32バンド・スペクトルバンク -> Final Ceiling
 ```
 
-Quality modes increase analysis depth and tone behavior, but public builds must
-stay practical on midrange CPUs. The current reference machine is an i5-13400.
+Driveで音圧を上げ、Ceilingで出力を保護し、素材に合うTypeを選び、Toneを調整して、
+メーターで結果を確認するワークフローを目指しています。
 
-The UI goal is not to imitate any commercial plugin directly. The goal is a
-clear mastering workflow: push loudness with Drive, protect the output with
-Ceiling, choose a Type for material, shape tone deliberately, then confirm the
-result with meters.
+## 上流プロジェクト、改変、ライセンス
 
-## Upstream, modifications, and license
+Peakeater SpectralはGPL-3.0ライセンスで配布します。詳細は `LICENSE.md` を参照してください。
+本プロジェクトはオープンソースのPeakEaterから派生しています。再配布時は上流の表示と
+GPL-3.0の条件を維持し、改変版であることを明記してください。PeakEaterの作者がこの改変版を
+支持していると誤解させる表現は禁止します。
 
-Peakeater Spectral is distributed under the GPL-3.0 License. See
-`LICENSE.md` for details.
+## ダウンロード
 
-This project derives from the open-source PeakEater project. Preserve upstream
-notices and clearly mark modified versions when redistributing them. Do not imply
-that PeakEater authors endorse this modification.
-
-When distributing binaries, include this source repository or an equivalent
-offer for the corresponding GPL-3.0 source.
-
-## Download
-
-Windows VST3 release archives are provided on the GitHub Releases page when a
-tagged release is published. Source code remains available in this repository.
+[GitHub Releases](https://github.com/brunouesugi-rgb/Peakeater-Spectral/releases)から
+Windows版を入手できます。ソースコード、ライセンス、ビルド手順、簡易インストーラーは
+このリポジトリで確認できます。
