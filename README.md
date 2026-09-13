@@ -112,6 +112,11 @@ macOS用VST3はGitHub Actionsの `macOS VST3` workflowを手動実行するか�
 pushするとビルドされます。完了後、ActionsのArtifactsからZIPをダウンロードしてください。
 現時点では署名・公証を行っていない開発ビルドです。
 
+**[macOS用VST3をダウンロードする（GitHub Actions）](https://github.com/brunouesugi-rgb/Peakeater-Spectral/actions/workflows/macos-vst3.yml)**
+
+Workflow実行後に表示される実行ページを開き、画面下部のArtifactsから
+`Peakeater-Spectral-macOS-VST3`をダウンロードしてください。
+
 ---
 
 ## English
@@ -161,3 +166,9 @@ Validate VST3 with `pluginval --strictness-level 10 --verbose
 --validate-in-process`. The project is distributed under GPL-3.0. Preserve the
 PeakEater attribution, license terms, and the fact that this is a modified
 derivative when redistributing it.
+
+**[Download macOS VST3 (GitHub Actions)](https://github.com/brunouesugi-rgb/Peakeater-Spectral/actions/workflows/macos-vst3.yml)**
+
+Open a completed workflow run and download `Peakeater-Spectral-macOS-VST3`
+from the Artifacts section. This is currently an unsigned and un notarized
+development build.
