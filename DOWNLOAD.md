@@ -1,5 +1,11 @@
 # Download Peakeater Spectral
 
+## 日本語
+
+Peakeater Spectralは、PeakEaterを基礎に改良したGPL-3.0のオープンソース・
+スペクトルリミッター／マキシマイザーです。Windows版には、VST3とCLAPを簡単に
+配置する `tools\\install-peakeater-spectral.bat` インストーラーを同梱できます。
+
 The Windows VST3 package is available from the GitHub Releases page:
 
 https://github.com/brunouesugi-rgb/Peakeater-Spectral/releases

@@ -40,6 +40,16 @@ Release archives are published from the GitHub Releases page for tagged builds.
 
 ## Installation
 
+### 日本語の説明
+
+Peakeater Spectralは、PeakEaterを土台に改良したGPL-3.0のオープンソース・
+スペクトルリミッター／マキシマイザーです。Driveで音圧を上げながら、True Peak、
+トランジェント、低域のモノ互換性を確認しやすい設計を目指しています。
+
+Windowsでは、パッケージ内の `tools\\install-peakeater-spectral.bat` を実行すると、
+管理者権限なしでVST3とCLAPをユーザー用フォルダへインストールできます。インストール
+後にAbleton Liveや使用中のDAWを再起動し、プラグインを再スキャンしてください。
+
 ### Windows VST3
 
 Copy the VST3 bundle to:
