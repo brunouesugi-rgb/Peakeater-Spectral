@@ -1,0 +1,63 @@
+name: macOS VST3
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-macos-vst3:
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build tools
+        run: |
+          brew install ninja
+          python -m pip install --upgrade pip conan
+
+      - name: Configure Conan profile
+        run: conan profile detect --force
+
+      - name: Install dependencies
+        run: |
+          conan install . \
+            -of build-mac \
+            -pr:h config/conan/macos.jinja \
+            -pr:b config/conan/macos.jinja \
+            -s build_type=Release \
+            --build=missing
+
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build-mac -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_TOOLCHAIN_FILE=build-mac/conan_toolchain.cmake \
+            -DCMAKE_PROJECT_NAME=peakeater_spectral_3 \
+            -DCMAKE_PROJECT_VERSION=0.1.0 \
+            -DCONAN_PROJECT_COMPANY="AXLRTR Audio Lab" \
+            -DCONAN_PROJECT_PRODUCT_NAME="Peakeater Spectral" \
+            -DCONAN_PROJECT_URL="https://github.com/brunouesugi-rgb/Peakeater-Spectral"
+
+      - name: Build macOS VST3
+        run: cmake --build build-mac --config Release --target peakeater_spectral_3_VST3 --parallel
+
+      - name: Package macOS VST3
+        run: |
+          mkdir -p package
+          cp -R "build-mac/peakeater_spectral_3_artefacts/Release/VST3/Peakeater Spectral.vst3" package/
+          ditto -c -k --sequesterRsrc --keepParent package "Peakeater-Spectral-macOS-VST3-${GITHUB_REF_NAME}.zip"
+
+      - name: Upload macOS VST3 artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Peakeater-Spectral-macOS-VST3-${{ github.ref_name }}
+          path: Peakeater-Spectral-macOS-VST3-${{ github.ref_name }}.zip
