@@ -14,12 +14,10 @@ if ($SystemInstall) {
 }
 
 $vst3 = Get-ChildItem -Path $PackageRoot -Recurse -Directory -Filter '*.vst3' |
-    Where-Object { $_.FullName -notmatch '\\build\\' } |
-    Sort-Object FullName |
+    Sort-Object @{ Expression = { if ($_.Name -match 'Spectral 3') { 0 } else { 1 } } }, FullName |
     Select-Object -First 1
 $clap = Get-ChildItem -Path $PackageRoot -Recurse -File -Filter '*.clap' |
-    Where-Object { $_.FullName -notmatch '\\build\\' } |
-    Sort-Object FullName |
+    Sort-Object @{ Expression = { if ($_.Name -match 'Spectral 3') { 0 } else { 1 } } }, FullName |
     Select-Object -First 1
 
 if (-not $vst3 -and -not $clap) {
