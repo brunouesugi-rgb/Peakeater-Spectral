@@ -107,3 +107,53 @@ GPL-3.0の条件を維持し、改変版であることを明記してくださ�
 [GitHub Releases](https://github.com/brunouesugi-rgb/Peakeater-Spectral/releases)から
 Windows版を入手できます。ソースコード、ライセンス、ビルド手順、簡易インストーラーは
 このリポジトリで確認できます。
+
+---
+
+## English
+
+Peakeater Spectral is a GPL-3.0 spectral limiter and maximizer by AXLRTR Audio
+Lab. It is an independent community modification based on the open-source
+PeakEater project. It adds spectral processing, Type-specific loudness control,
+transient protection, low-band protection, True Peak safety, and CPU-focused
+realtime processing.
+
+### Features
+
+- Drive-first limiter workflow with the original `Threshold` parameter ID kept
+  for project compatibility.
+- Type-aware processing for EDM, Hip Hop, Drums, One Shot, One Shot Clean,
+  Acoustic, Vocal, Bass, Bright, Glue, Clean, Percs, Dubstep, DrumNBass,
+  House, Trap, and 808&Kick.
+- 12-band limiter and 32-band spectral control with Quality-dependent internal
+  processing.
+- Ceiling, Detector HP, Saturation, Tone, Attack, Hold, Release, Transient,
+  Lookahead, Output, and Dry/Wet controls.
+- Input Peak, Output Peak, True Peak estimate, LUFS-S estimate, RMS, Crest,
+  Gain Reduction, and Clip Amount metering.
+- Windows VST3 and CLAP builds, with other formats available in the CMake setup.
+
+### Installation
+
+Run `tools\\install-peakeater-spectral.bat` on Windows for a user-level
+installation without administrator rights. It installs VST3 and CLAP artifacts,
+then the DAW should be restarted and rescanned.
+
+Manual locations:
+
+```text
+VST3: C:\\Program Files\\Common Files\\VST3
+CLAP: C:\\Users\\<username>\\.clap
+```
+
+### Build and validation
+
+```powershell
+.\\.venv\\Scripts\\conan.exe build . -pr:h config/conan/windows-local.jinja -pr:b config/conan/windows-local.jinja
+cmake --build build\\Fast --config Release --target peakeater_spectral_3_CLAP
+```
+
+Validate VST3 with `pluginval --strictness-level 10 --verbose
+--validate-in-process`. The project is distributed under GPL-3.0. Preserve the
+PeakEater attribution, license terms, and the fact that this is a modified
+derivative when redistributing it.
